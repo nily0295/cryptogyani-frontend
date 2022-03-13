@@ -1,0 +1,38 @@
+.box {
+  background-color: rgba(0,0,0,0.8);
+  width: 100%;
+  color: white;
+}
+.just {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.stick {
+    position: sticky;
+    top: 0;
+}
+
+.h-heigh {
+    height: 70px;
+}
+.buy {
+    color: green;
+    font-weight: bold;
+}
+.sell {
+    color: red;
+    font-weight: bold;
+}
+.curr {
+    font-size: x-small;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+.cash {
+    line-height: 3px;
+}
+.coin_title{
+    font-weight: 700;
+    text-transform: uppercase;
+}

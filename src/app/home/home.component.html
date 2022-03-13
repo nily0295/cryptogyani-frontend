@@ -1,0 +1,130 @@
+<header class="py-3 bg-primary h-heigh">
+  <div class="container">
+    <div class="row">
+      <h3>
+        <img
+          src="../../assets/img/cryptogyani.png"
+          alt="Cryptogyani"
+          style="width: 205px; height: 40px"
+        />
+      </h3>
+    </div>
+  </div>
+</header>
+
+<section class="py-1">
+  <div class="container">
+    <div class="row">
+      <div class="card m-2" style="width: 30%" *ngFor="let data of tickers">
+        <div class="card-header bg-light coin_title">
+          {{ data[0].baseAsset }}
+        </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">
+            <div class="row">
+              <div class="col-md-4">
+                <span class="buy">BUY</span> <br />
+                <span class="curr">{{ data[0].symbol }}</span>
+              </div>
+              <div class="col-md-8 cash">
+                <span><p class="curr">
+                    {{ data[0].buy[0].symbol }} :
+                    {{ roundUp(data[0].buy[0].quantity) }} (inr:
+                    {{ roundUpinr(data[0].buy[0].amount) }})
+                </p></span>
+                <span><p class="curr">
+                    Fee's : {{ roundUp(data[0].buy[0].fees) }} (inr:
+                    {{ roundUpinr(data[0].buy[0].fees_inr) }})
+                  </p></span >
+                <span><p class="curr">
+                    Buy : {{ roundUp(data[0].buy[0].final_buy_quantity) }} (inr:
+                    {{ roundUpinr(data[0].buy[0].final_buy_quantity_inr) }})
+                  </p></span>
+                <div *ngIf="data[0].buy.length == 2">
+                  <hr />
+                  <span
+                    ><p class="curr">
+                      {{ data[0].buy[1].symbol }} :
+                      {{ roundUp(data[0].buy[1].quantity) }}
+                    </p></span
+                  >
+                  <span
+                    ><p class="curr">
+                      Fee's : {{ roundUp(data[0].buy[1].fees) }} (inr:
+                      {{ roundUpinr(data[0].buy[1].fees_inr) }})
+                    </p></span
+                  >
+                  <span
+                    ><p class="curr">
+                      Final Buy :{{
+                        roundUp(data[0].buy[1].final_buy_quantity)
+                      }}
+                      (inr: {{ roundUpinr(data[0].buy[1].final_buy_quantity_inr) }})
+                    </p></span
+                  >
+                </div>
+              </div>
+            </div>
+          </li>
+          <li class="list-group-item">
+            <div class="row">
+              <div class="col-md-4">
+                <span class="sell">SELL</span> <br />
+                <span class="curr">{{ data[1].symbol }}</span>
+              </div>
+              <div class="col-md-8 cash">
+                <span
+                  ><p class="curr">
+                    {{ data[1].sell[0].symbol }} :
+                    {{ roundUp(data[1].sell[0].quantity) }}
+                  </p></span
+                >
+                <span
+                  ><p class="curr">
+                    Fee's : {{ roundUp(data[1].sell[0].fees) }} (inr:
+                    {{ roundUpinr(data[1].sell[0].fees_eq_inr) }})
+                  </p></span
+                >
+                <span
+                  ><p class="curr">
+                    Sell : {{ roundUp(data[1].sell[0].final_sell_quantity_inr) }} (inr:
+                    {{ roundUpinr(data[1].sell[0].get_coin_inr) }})
+                  </p></span
+                >
+                <div *ngIf="data[1].sell.length == 2">
+                  <hr />
+                  <span
+                    ><p class="curr">
+                      {{ data[1].sell[1].symbol }} :
+                      {{ roundUp(data[1].sell[1].quantity) }}
+                    </p></span
+                  >
+                  <span
+                    ><p class="curr">
+                      Fee's : {{ roundUp(data[1].sell[1].fees) }}
+                    </p></span
+                  >
+                  <span
+                    ><p class="curr">
+                      Final Sell : {{ roundUp(data[1].sell[1].final_sell_quantity_inr) }}
+                    </p></span
+                  >
+                </div>
+              </div>
+            </div>
+          </li>
+        </ul>
+        <div class="card-footer bg-success text-white">
+          Profit :
+          {{
+            roundUpinr(
+              (data[1].sell.length == 2
+                ? data[1].sell[1].final_sell_quantity_inr
+                : data[1].sell[0].final_sell_quantity_inr) - data[0].buy[0].amount
+            )
+          }}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
